@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Lost in the Garden</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+            color: #333;
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 20px;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0) rotate(0deg);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1) rotate(180deg);
+            }
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        .flower-pot {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin-bottom: 40px;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .pot {
+            width: 150px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            border-radius: 0 0 50px 50px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 10px 30px rgba(196, 69, 105, 0.3);
+        }
+
+        .pot::before {
+            content: '❤';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .stem {
+            width: 8px;
+            height: 120px;
+            background: linear-gradient(180deg, #7cb342 0%, #558b2f 100%);
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+
+        .flower {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bloom 3s ease-in-out infinite;
+        }
+
+        @keyframes bloom {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        .petal {
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 50% 50% 50% 0;
+            position: absolute;
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+        }
+
+        .petal:nth-child(1) { transform: rotate(0deg) translateY(-25px); }
+        .petal:nth-child(2) { transform: rotate(72deg) translateY(-25px); }
+        .petal:nth-child(3) { transform: rotate(144deg) translateY(-25px); }
+        .petal:nth-child(4) { transform: rotate(216deg) translateY(-25px); }
+        .petal:nth-child(5) { transform: rotate(288deg) translateY(-25px); }
+
+        .center {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 3px 10px rgba(253, 203, 110, 0.5);
+        }
+
+        .leaf {
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%);
+            border-radius: 0 100% 50% 100%;
+            position: absolute;
+            bottom: 150px;
+        }
+
+        .leaf-left {
+            left: 35%;
+            transform: rotate(-45deg);
+        }
+
+        .leaf-right {
+            right: 35%;
+            transform: rotate(45deg) scaleX(-1);
+        }
+
+        h1 {
+            font-size: 120px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ff9a9e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 3px 3px 10px rgba(255, 107, 157, 0.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #c44569;
+            text-shadow: 2px 2px 4px rgba(196, 69, 105, 0.2);
+            font-style: italic;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .required-text {
+            font-size: 16px;
+            color: #ff6b9d;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 15px 45px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: normal;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(196, 69, 105, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(196, 69, 105, 0.6);
+        }
+
+        .btn::before {
+            content: '✨';
+            position: absolute;
+            left: 15px;
+        }
+
+        .btn::after {
+            content: '✨';
+            position: absolute;
+            right: 15px;
+        }
+
+        .butterfly {
+            position: fixed;
+            font-size: 30px;
+            animation: fly 15s ease-in-out infinite;
+            z-index: 100;
+        }
+
+        @keyframes fly {
+            0% { 
+                top: 10%; 
+                left: 0%; 
+                transform: rotate(0deg);
+            }
+            25% { 
+                top: 80%; 
+                left: 70%; 
+                transform: rotate(90deg);
+            }
+            50% { 
+                top: 20%; 
+                left: 100%; 
+                transform: rotate(180deg);
+            }
+            75% { 
+                top: 70%; 
+                left: 30%; 
+                transform: rotate(270deg);
+            }
+            100% { 
+                top: 10%; 
+                left: 0%; 
+                transform: rotate(360deg);
+            }
+        }
+
+        .cloud {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 100px;
+            animation: drift 20s linear infinite;
+        }
+
+        .cloud1 {
+            width: 100px;
+            height: 50px;
+            top: 10%;
+            left: -100px;
+        }
+
+        .cloud2 {
+            width: 150px;
+            height: 60px;
+            top: 30%;
+            left: -150px;
+            animation-delay: 5s;
+        }
+
+        @keyframes drift {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(100vw + 200px)); }
+        }
+
+        .heart {
+            position: fixed;
+            color: rgba(255, 107, 157, 0.3);
+            font-size: 20px;
+            animation: floatUp 5s ease-in infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 80px; }
+            .subtitle { font-size: 22px; }
+            .flower-pot { width: 200px; height: 200px; }
+            .message { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles" id="sparkles"></div>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="butterfly">🦋</div>
+    
+    <div class="container">
+        <div class="flower-pot">
+            <div class="pot"></div>
+            <div class="stem"></div>
+            <div class="leaf leaf-left"></div>
+            <div class="leaf leaf-right"></div>
+            <div class="flower">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+        </div>
+        
+        <h1>404</h1>
+        <div class="subtitle">Oops! This Garden Path Leads Nowhere</div>
+        <div class="message">
+            The page you're looking for seems to have wandered off like a butterfly in spring. 
+            But don't worry, every wrong turn in the garden leads to something beautiful! 🌸
+        </div>
+        <div class="required-text">Ceci n'est pas une page</div>
+        <a href="/" class="btn">Back to Garden</a>
+    </div>
+
+    <script>
+        // Generate sparkles
+        const sparklesContainer = document.getElementById('sparkles');
+        const sparkleSymbols = ['✨', '⭐', '💫', '🌟'];
+        
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.textContent = sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            sparkle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            sparklesContainer.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 6000);
+        }
+        
+        setInterval(createSparkle, 500);
+        
+        // Generate floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.bottom = '0';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 7000);
+        }
+        
+        setInterval(createHeart, 2000);
+        
+        // Interactive flower growing on mouse position
+        document.addEventListener('click', (e) => {
+            const miniFlower = document.createElement('div');
+            miniFlower.textContent = '🌸';
+            miniFlower.style.position = 'fixed';
+            miniFlower.style.left = e.clientX + 'px';
+            miniFlower.style.top = e.clientY + 'px';
+            miniFlower.style.fontSize = '0';
+            miniFlower.style.transition = 'all 1s ease-out';
+            miniFlower.style.pointerEvents = 'none';
+            miniFlower.style.zIndex = '1000';
+            document.body.appendChild(miniFlower);
+            
+            setTimeout(() => {
+                miniFlower.style.fontSize = '40px';
+                miniFlower.style.transform = 'translateY(-50px)';
+                miniFlower.style.opacity = '0';
+            }, 10);
+            
+            setTimeout(() => miniFlower.remove(), 1100);
+        });
+
+        // Gentle parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const flowerPot = document.querySelector('.flower-pot');
+            const x = (e.clientX / window.innerWidth - 0.5) * 10;
+            const y = (e.clientY / window.innerHeight - 0.5) * 10;
+            flowerPot.style.transform = `translate(${x}px, ${y}px) rotate(${x * 0.1}deg)`;
+        });
+    </script>
+</body>
+</html>
